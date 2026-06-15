@@ -1,0 +1,66 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agendaflop_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-agendaflop}
+      POSTGRES_USER: ${DB_USER:-agendaflop}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agendaflop_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-agendaflop} -d ${DB_NAME:-agendaflop}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: agendaflop_redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build:
+      context: ./agendaflop_backend
+      dockerfile: Dockerfile
+    container_name: agendaflop_backend
+    env_file:
+      - .env.docker
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      DB_HOST: db
+      DB_PORT: 5432
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - static_data:/app/staticfiles
+      - media_data:/app/media
+      - logs_data:/app/logs
+
+  frontend:
+    build:
+      context: ./agendaflop-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: /api
+    container_name: agendaflop_frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - static_data:/vol/static:ro
+      - media_data:/vol/media:ro
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_data:
+  media_data:
+  logs_data:

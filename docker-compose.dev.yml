@@ -1,0 +1,87 @@
+name: agendaflop_dev
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agendaflop_db_dev
+    environment:
+      POSTGRES_DB: ${DB_NAME:-agendaflop_dev}
+      POSTGRES_USER: ${DB_USER:-agendaflop}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agendaflop_password}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-agendaflop} -d ${DB_NAME:-agendaflop_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: agendaflop_redis_dev
+    command: redis-server --appendonly yes
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data_dev:/data
+
+  backend:
+    build:
+      context: ./agendaflop_backend
+      dockerfile: Dockerfile
+    container_name: agendaflop_backend_dev
+    env_file:
+      - .env.dev
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: ${DB_NAME:-agendaflop_dev}
+      DB_USER: ${DB_USER:-agendaflop}
+      DB_PASSWORD: ${DB_PASSWORD:-agendaflop_password}
+      DB_HOST: db
+      DB_PORT: 5432
+      REDIS_URL: redis://redis:6379/0
+      DEBUG: "True"
+    command: >
+      sh -c "
+      echo 'Waiting for database db:5432...';
+      while ! nc -z db 5432; do sleep 1; done;
+      python manage.py migrate --noinput;
+      python manage.py runserver 0.0.0.0:8000
+      "
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./agendaflop_backend:/app
+      - logs_data_dev:/app/logs
+
+  frontend:
+    image: node:20-alpine
+    container_name: agendaflop_frontend_dev
+    working_dir: /app
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:8000/api
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+      WATCHPACK_POLLING: "true"
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5173"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./agendaflop-frontend:/app
+      - frontend_node_modules_dev:/app/node_modules
+
+volumes:
+  postgres_data_dev:
+  redis_data_dev:
+  logs_data_dev:
+  frontend_node_modules_dev:

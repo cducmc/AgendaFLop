@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   VARIABLES CSS - TEMA DINÁMICO
+   ============================================================================= */
+:root {
+  /* Colores por defecto (se sobrescriben con los del negocio) */
+  /* Formato RGB sin paréntesis para Tailwind: "R G B" */
+  --color-primary: 99 102 241; /* #6366f1 Indigo */
+  --color-primary-light: 129 140 248; /* #818cf8 */
+  --color-primary-dark: 79 70 229; /* #4f46e5 */
+  
+  --color-secondary: 139 92 246; /* #8b5cf6 Purple */
+  --color-secondary-light: 167 139 250; /* #a78bfa */
+  --color-secondary-dark: 124 58 237; /* #7c3aed */
+  
+  /* Versiones hex para referencia */
+  --color-primary-hex: #6366f1;
+  --color-secondary-hex: #8b5cf6;
+}
+
+/* =============================================================================
+   ANIMACIONES PERSONALIZADAS
+   ============================================================================= */
+
+/* Animación para modales - Fade in desde abajo */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.3s ease-out;
+}
+
+/* Animación de pulso suave para botones importantes */
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

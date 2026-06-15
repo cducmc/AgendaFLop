@@ -1,0 +1,28 @@
+# =============================================================================
+# AGENDAFLOP - DEPENDENCIAS DE DESARROLLO
+# =============================================================================
+# Este archivo incluye herramientas adicionales para desarrollo y testing.
+# NO instalar en producción.
+#
+# Instalación: pip install -r requirements-dev.txt
+# =============================================================================
+
+# Primero instala todas las dependencias de producción
+-r requirements.txt
+
+# Testing
+pytest>=8.0.0,<9.0.0
+pytest-django>=4.7.0,<5.0.0
+pytest-cov>=4.1.0,<5.0.0  # Coverage de tests
+
+# Code Quality
+black>=24.0.0,<25.0.0  # Formateador de código
+flake8>=7.0.0,<8.0.0  # Linter
+isort>=5.13.0,<6.0.0  # Organizador de imports
+
+# Debugging
+ipython>=8.20.0,<9.0.0  # Python shell mejorado
+django-debug-toolbar>=4.2.0,<5.0.0  # Debug toolbar para Django
+
+# Documentation
+mkdocs>=1.5.0,<2.0.0  # Generador de documentación

@@ -1,0 +1,330 @@
+# =============================================================================
+# AGENDAFLOP - .gitignore
+# =============================================================================
+# Archivos y directorios que NO deben estar en el control de versiones
+# =============================================================================
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+
+# =============================================================================
+# DJANGO
+# =============================================================================
+
+# Database
+*.sqlite3
+*.db
+
+# Static files
+/static/
+/staticfiles/
+/static_root/
+
+# Media files (opcional: algunos proyectos sí quieren media en git)
+/media/
+/mediafiles/
+
+# Logs
+logs/
+*.log
+
+# Local settings
+local_settings.py
+
+# Django migrations (algunos proyectos SÍ incluyen migrations en git)
+# **/migrations/*.py
+# !**/migrations/__init__.py
+
+# Django secret key (si no usas .env)
+secret_key.txt
+
+
+# =============================================================================
+# VARIABLES DE ENTORNO Y SECRETOS
+# =============================================================================
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Credenciales
+*.pem
+*.key
+*.cert
+credentials.json
+service-account.json
+
+
+# =============================================================================
+# IDEs Y EDITORES
+# =============================================================================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+
+# =============================================================================
+# SISTEMA OPERATIVO
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+
+
+# =============================================================================
+# DEPLOYMENT Y BUILD
+# =============================================================================
+
+# Docker
+docker-compose.override.yml
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Kubernetes
+*.kubeconfig
+
+
+# =============================================================================
+# BACKUP Y TEMPORALES
+# =============================================================================
+
+# Backups
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.temp
+*.tmp
+
+# Compressed files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+
+# =============================================================================
+# TESTS Y COVERAGE
+# =============================================================================
+
+# pytest
+.pytest_cache/
+.tox/
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
+
+
+# =============================================================================
+# NODE (si usas frontend con React/Vue/etc)
+# =============================================================================
+
+# node_modules/
+# package-lock.json
+# npm-debug.log
+# yarn-error.log
+# .next/
+# out/
+
+
+# =============================================================================
+# KEEP FILES (incluir en git)
+# =============================================================================
+
+# Asegurar que estos archivos SÍ estén en git
+!.gitignore
+!.gitkeep
+!.env.example
+!requirements.txt
+!README.md

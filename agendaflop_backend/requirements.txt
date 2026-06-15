@@ -1,0 +1,51 @@
+# =============================================================================
+# AGENDAFLOP - DEPENDENCIAS DE PRODUCCIÓN
+# =============================================================================
+# Este archivo contiene las dependencias mínimas necesarias para ejecutar
+# el proyecto en producción.
+#
+# Instalación: pip install -r requirements.txt
+# =============================================================================
+
+# Django Framework (6.x LTS cuando esté disponible, por ahora última estable)
+Django>=6.0.2,<6.1.0
+
+# Django REST Framework - Para construcción de APIs RESTful
+djangorestframework>=3.16.1,<4.0.0
+
+# PostgreSQL Database Connector (producción)
+psycopg2-binary>=2.9.9,<3.0.0
+
+# WSGI Server de producción
+gunicorn>=22.0.0,<23.0.0
+
+# Variables de entorno - Seguridad (evita hardcodear secrets)
+python-decouple>=3.8,<4.0.0
+
+# Django Filter - Para filtros avanzados en APIs
+django-filter>=24.3,<25.0
+
+# CORS Headers - Para frontend separado (React, mobile, etc.)
+django-cors-headers>=4.3.0,<5.0.0
+
+# JSON Web Token Authentication - Para autenticación API
+djangorestframework-simplejwt>=5.3.0,<6.0.0
+
+# Pillow - Para manejo de imágenes (logos, avatares)
+Pillow>=10.0.0,<11.0.0
+
+# Pillow AVIF Plugin - Soporte para formato AVIF
+pillow-avif-plugin>=1.4.3
+
+# ReportLab - Generación de reportes PDF
+reportlab>=4.2.0,<5.0.0
+
+# Redis client y cache backend
+redis>=5.0.0,<6.0.0
+django-redis>=5.4.0,<6.0.0
+
+# Celery - Para tareas asíncronas (emails, notificaciones)
+# celery>=5.3.0,<6.0.0  # Descomentar cuando se necesite
+
+# Redis - Cache y message broker para Celery
+# redis>=5.0.0,<6.0.0  # Descomentar cuando se necesite
